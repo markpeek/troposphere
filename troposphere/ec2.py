@@ -2008,18 +2008,6 @@ class SpotFleet(AWSObject):
     }
 
 
-class PrivateDnsNameOptionsOnLaunch(AWSProperty):
-    """
-    `PrivateDnsNameOptionsOnLaunch <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-subnet-privatednsnameoptionsonlaunch.html>`__
-    """
-
-    props: PropsDictType = {
-        "EnableResourceNameDnsAAAARecord": (boolean, False),
-        "EnableResourceNameDnsARecord": (boolean, False),
-        "HostnameType": (str, False),
-    }
-
-
 class Subnet(AWSObject):
     """
     `Subnet <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-subnet.html>`__
@@ -2031,13 +2019,13 @@ class Subnet(AWSObject):
         "AssignIpv6AddressOnCreation": (boolean, False),
         "AvailabilityZone": (str, False),
         "AvailabilityZoneId": (str, False),
-        "CidrBlock": (str, True),
+        "CidrBlock": (str, False),
         "EnableDns64": (boolean, False),
         "Ipv6CidrBlock": (str, False),
         "Ipv6Native": (boolean, False),
         "MapPublicIpOnLaunch": (boolean, False),
         "OutpostArn": (str, False),
-        "PrivateDnsNameOptionsOnLaunch": (PrivateDnsNameOptionsOnLaunch, False),
+        "PrivateDnsNameOptionsOnLaunch": (dict, False),
         "Tags": (validate_tags_or_list, False),
         "VpcId": (str, True),
     }
@@ -2283,16 +2271,6 @@ class TransitGatewayMulticastGroupSource(AWSObject):
     }
 
 
-class TransitGatewayPeeringAttachmentOptions(AWSProperty):
-    """
-    `TransitGatewayPeeringAttachmentOptions <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-transitgatewaypeeringattachment-transitgatewaypeeringattachmentoptions.html>`__
-    """
-
-    props: PropsDictType = {
-        "DynamicRouting": (str, False),
-    }
-
-
 class TransitGatewayPeeringAttachment(AWSObject):
     """
     `TransitGatewayPeeringAttachment <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-transitgatewaypeeringattachment.html>`__
@@ -2301,7 +2279,6 @@ class TransitGatewayPeeringAttachment(AWSObject):
     resource_type = "AWS::EC2::TransitGatewayPeeringAttachment"
 
     props: PropsDictType = {
-        "Options": (TransitGatewayPeeringAttachmentOptions, False),
         "PeerAccountId": (str, True),
         "PeerRegion": (str, True),
         "PeerTransitGatewayId": (str, True),
@@ -2375,10 +2352,10 @@ class TransitGatewayVpcAttachment(AWSObject):
         "AddSubnetIds": ([str], False),
         "Options": (dict, False),
         "RemoveSubnetIds": ([str], False),
-        "SubnetIds": ([str], False),
+        "SubnetIds": ([str], True),
         "Tags": (Tags, False),
-        "TransitGatewayId": (str, False),
-        "VpcId": (str, False),
+        "TransitGatewayId": (str, True),
+        "VpcId": (str, True),
     }
 
 
